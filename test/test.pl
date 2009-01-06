@@ -2,7 +2,7 @@
 BEGIN {require 5.006}
 use strict;
 use warnings;
-use lib './lib';
+use lib '../lib';
 use Tkx;
 use Tkx::ROText;
 
