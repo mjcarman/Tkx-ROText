@@ -5,7 +5,7 @@ use warnings;
 use Tkx;
 use base qw(Tkx::widget);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 __PACKAGE__->_Mega("tkx_ROText");
 
