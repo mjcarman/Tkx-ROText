@@ -6,10 +6,18 @@ INSTALLATION
 
 To install this module, run the following commands:
 
-	perl Build.PL
-	./Build
-	./Build test
-	./Build install
+    perl Build.PL
+    ./Build
+    ./Build test
+    ./Build install
+
+If you don't have Module::Build installed you can fall back to the old 
+makefile interface:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
 
 SUPPORT AND DOCUMENTATION
 
@@ -32,8 +40,7 @@ You can also look for information at:
     Search CPAN
         http://search.cpan.org/dist/Tkx-ROText
 
-
-COPYRIGHT AND LICENCE
+COPYRIGHT AND LICENSE
 
 Copyright (C) 2009 Michael J. Carman
 
