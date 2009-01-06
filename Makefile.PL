@@ -5,7 +5,8 @@ WriteMakefile
           'NAME' => 'Tkx::ROText',
           'VERSION_FROM' => 'lib/Tkx/ROText.pm',
           'PREREQ_PM' => {
-                           'Test::More' => 0
+                           'Test::More' => 0,
+                           'Tkx' => 0
                          },
           'INSTALLDIRS' => 'site',
           'EXE_FILES' => [],

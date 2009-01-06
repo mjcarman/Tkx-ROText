@@ -7,6 +7,8 @@ abstract: Read-only Tkx text widget.
 license: perl
 resources:
   license: http://dev.perl.org/licenses/
+requires:
+  Tkx: 0
 build_requires:
   Test::More: 0
 provides:
