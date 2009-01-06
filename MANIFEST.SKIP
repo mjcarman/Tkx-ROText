@@ -1,0 +1,7 @@
+^_build
+^Build$
+^Build\.bat$
+^blib
+^test
+^MANIFEST\.SKIP$
+\.svn
