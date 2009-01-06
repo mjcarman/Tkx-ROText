@@ -1,6 +1,7 @@
 package Tkx::ROText;
 use strict;
 use warnings;
+
 use Tkx;
 use base qw(Tkx::widget);
 
@@ -25,11 +26,11 @@ sub _Populate {
 	# through to the private widget.
 	Tkx::eval(<<EOT);
 proc $self {args} [string map [list WIDGET $self] {
-  switch [lindex \$args 0] {
-    "insert" {}
-    "delete" {}
-    "default" { return [eval WIDGET.priv \$args] }
-  }
+    switch [lindex \$args 0] {
+        "insert" {}
+        "delete" {}
+        "default" { return [eval WIDGET.priv \$args] }
+    }
 }]
 EOT
 
@@ -49,32 +50,27 @@ __END__
 
 =head1 NAME
 
-Tkx::ROText - Read-only text widget for Tkx (because Tk doesn't have one).
-
-=head1 VERSION
-
-Version 0.01
+Tkx::ROText - Read-only Tkx text widget.
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
     use Tkx::ROText;
-
-    my $foo = Tkx::ROText->new();
     ...
+    my $text = $parent->new_tkx_ROText();
 
-=head1 AUTHOR
+=head1 DESCRIPTION
 
-Michael J. Carman, C<< <mjcarman at cpan.org> >>
+Tk doesn't have a read-only text widget which means that Tkx -- being a 
+thin wrapper -- doesn't either. This module provides a text widget that 
+is read-only (to the end-user) but which may be modified 
+programatically. In all other ways it behaves as (and in fact is) a 
+standard text widget.
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-tkx-rotext at rt.cpan.org>, 
+Please report any bugs or feature requests to C<bug-tkx-rotext at rt.cpan.org> 
 or through the web interface at 
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Tkx-ROText>.  I will be 
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Tkx-ROText>. I will be 
 notified, and then you'll automatically be notified of progress on your bug as I 
 make changes.
 
@@ -83,7 +79,6 @@ make changes.
 You can find documentation for this module with the perldoc command.
 
     perldoc Tkx::ROText
-
 
 You can also look for information at:
 
@@ -107,9 +102,9 @@ L<http://search.cpan.org/dist/Tkx-ROText>
 
 =back
 
+=head1 AUTHOR
 
-=head1 ACKNOWLEDGEMENTS
-
+Michael J. Carman, C<< <mjcarman at cpan.org> >>
 
 =head1 COPYRIGHT & LICENSE
 
@@ -117,6 +112,5 @@ Copyright 2009 Michael J. Carman, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
-
 
 =cut
