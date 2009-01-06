@@ -4,4 +4,6 @@
 ^blib
 ^test
 ^MANIFEST\.SKIP$
+\.bak$
 \.svn
+\.tmp$

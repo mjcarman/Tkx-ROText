@@ -1,6 +1,8 @@
 Build.PL
 Changes
-MANIFEST
-README
 lib/Tkx/ROText.pm
+Makefile.PL
+MANIFEST
+META.yml
+README
 t/00-load.t
