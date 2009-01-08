@@ -8,7 +8,8 @@ my $builder = Module::Build->new(
 	dist_author         => 'Michael J. Carman <mjcarman@cpan.org>',
 	dist_version_from   => 'lib/Tkx/ROText.pm',
 	requires            => {
-		'Tkx' => 0,
+		'Carp' => 0,
+		'Tkx'  => 0,
 	},
 	build_requires => {
 		'Test::More' => 0,

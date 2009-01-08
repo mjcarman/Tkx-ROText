@@ -1,9 +1,15 @@
 Revision history for Tkx-ROText
 
+0.03  1/8/2009
+      Changed widget from being fixed as read-only to supporting 'readonly' as 
+      an option for the -state configuration item. The state can now be toggled 
+      between readonly (the default), normal, and disabled.
+
+0.02  1/5/2009
+      Re-release with revised directory permissions in tar archive to make the 
+      CPAN indexer happy.
+      cf. http://use.perl.org/~bart/journal/38127
+
 0.01  1/5/2009
       First version, released on an unsuspecting world.
 
-0.02  1/5/2009
-      Re-release with revised directory permissions in tar archive to
-      make the CPAN indexer happy.
-      cf. http://use.perl.org/~bart/journal/38127
