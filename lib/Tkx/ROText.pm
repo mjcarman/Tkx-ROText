@@ -6,7 +6,7 @@ use Carp qw'croak';
 use Tkx;
 use base qw(Tkx::widget Tkx::MegaConfig);
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 __PACKAGE__->_Mega('tkx_ROText');
 
@@ -48,10 +48,11 @@ sub _Populate {
 #-------------------------------------------------------------------------------
 # Method  : insert/delete
 # Purpose : Provide methods for programmatic insertions and deletions
-# Notes   : 
+# Notes   : The 'm_' prefix is to support method delegation from megawidgets
+#           that embed this one.
 #-------------------------------------------------------------------------------
-sub insert { my $self = shift; Tkx::i::call($self . '.priv', 'insert', @_) }
-sub delete { my $self = shift; Tkx::i::call($self . '.priv', 'delete', @_) }
+sub m_insert { my $self = shift; Tkx::i::call($self . '.priv', 'insert', @_) }
+sub m_delete { my $self = shift; Tkx::i::call($self . '.priv', 'delete', @_) }
 
 
 #-------------------------------------------------------------------------------
