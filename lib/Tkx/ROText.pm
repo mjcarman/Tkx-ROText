@@ -6,13 +6,13 @@ use Carp qw'croak';
 use Tkx;
 use base qw(Tkx::widget Tkx::MegaConfig);
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 __PACKAGE__->_Mega('tkx_ROText');
 
 __PACKAGE__->_Config(
 	-state  => ['METHOD'],
-	DEFAULT => ['.'],
+	DEFAULT => ['.text'],
 );
 
 
@@ -29,14 +29,18 @@ sub _Populate {
 	my $state  = delete $opt{-state}; # use custom handler for this option
 
 	# create the widget
-	my $self = $class->new($path)->_parent->new_text(-name => $path, %opt);
+	my $self = $class->new($path)->_parent
+		->new_frame(-name => $path, -class => 'Tkx_ROText');
 	$self->_class($class);
+
+	my $text = $self->new_text(-name => 'text', %opt);
+	$text->g_pack();
 
 	# Rename the widget to make it private. This enables us to stub the
 	# insert/delete methods and make it read-only. Calling _readonly() sets up
 	# the handlers for public/private aliasing so that calls to the configure()
 	# method work.
-	Tkx::rename($self, $self . '.priv');
+	Tkx::rename($text, $text . '.priv');
 	$self->_readonly();
 
 	$self->configure(-state => $state);
@@ -46,13 +50,21 @@ sub _Populate {
 
 
 #-------------------------------------------------------------------------------
+# Method  : _mpath
+# Purpose : Delegate all method calls to the text subwidget.
+# Notes   : 
+#-------------------------------------------------------------------------------
+sub _mpath { $_[0] . '.text' }
+
+
+#-------------------------------------------------------------------------------
 # Method  : insert/delete
 # Purpose : Provide methods for programmatic insertions and deletions
 # Notes   : The 'm_' prefix is to support method delegation from megawidgets
 #           that embed this one.
 #-------------------------------------------------------------------------------
-sub m_insert { my $self = shift; Tkx::i::call($self . '.priv', 'insert', @_) }
-sub m_delete { my $self = shift; Tkx::i::call($self . '.priv', 'delete', @_) }
+sub m_insert { my $self = shift; Tkx::i::call($self . '.text.priv', 'insert', @_) }
+sub m_delete { my $self = shift; Tkx::i::call($self . '.text.priv', 'delete', @_) }
 
 
 #-------------------------------------------------------------------------------
@@ -63,19 +75,20 @@ sub m_delete { my $self = shift; Tkx::i::call($self . '.priv', 'delete', @_) }
 sub _config_state {
 	my $self  = shift;
 	my $state = shift;
+	my $path  = $self . '.text';
 
 	if (defined $state) {
 
 		if ($state eq 'readonly') {
 			$self->_readonly(1);
-			Tkx::i::call($self, 'configure', '-state', 'normal');
+			Tkx::i::call($path , 'configure', '-state', 'normal');
 		}
 		elsif ($state eq 'normal') {
 			$self->_readonly(0);
-			Tkx::i::call($self, 'configure', '-state', 'normal');
+			Tkx::i::call($path, 'configure', '-state', 'normal');
 		}
 		elsif ($state eq 'disabled') {
-			Tkx::i::call($self, 'configure', '-state', 'disabled');
+			Tkx::i::call($path, 'configure', '-state', 'disabled');
 			# The readonly state doesn't matter when the widget is disabled.
 		}
 		else {
@@ -97,11 +110,12 @@ sub _config_state {
 sub _readonly {
 	my $self = shift;
 	my $ro   = shift;
+	my $path = $self . '.text';
 
 	if ($ro) {
 
 		Tkx::eval(<<EOT);
-proc $self {args} [string map [list WIDGET $self] {
+proc $path {args} [string map [list WIDGET $path] {
 	switch [lindex \$args 0] {
 		"insert" {}
 		"delete" {}
@@ -114,7 +128,7 @@ EOT
 	else {
 
 		Tkx::eval(<<EOT);
-proc $self {args} [string map [list WIDGET $self] {
+proc $path {args} [string map [list WIDGET $path] {
 	return [eval WIDGET.priv \$args]
 }]
 EOT

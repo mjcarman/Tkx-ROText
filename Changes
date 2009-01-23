@@ -1,5 +1,10 @@
 Revision history for Tkx-ROText
 
+0.05  (2009-01-23)
+    - Changed from being text-based to frame-based. This means that 
+      $w->g_winfo_class() now reports 'Tkx_ROText'. More importantly, we 
+      should now have support for class-specific options and bindings.
+
 0.04  (2009-01-19)
     - Added 'm_*' prefix to public method names to support delgation from
       other megawidgets. (Requires Tkx v1.06+)
