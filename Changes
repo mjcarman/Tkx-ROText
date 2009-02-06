@@ -1,5 +1,8 @@
 Revision history for Tkx-ROText
 
+0.06  (2009-02-06)
+    - Expand text widget to fill parent frame.
+
 0.05  (2009-01-23)
     - Changed from being text-based to frame-based. This means that 
       $w->g_winfo_class() now reports 'Tkx_ROText'. More importantly, we 

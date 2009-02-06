@@ -6,7 +6,7 @@ use Carp qw'croak';
 use Tkx;
 use base qw(Tkx::widget Tkx::MegaConfig);
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 __PACKAGE__->_Mega('tkx_ROText');
 
@@ -34,7 +34,7 @@ sub _Populate {
 	$self->_class($class);
 
 	my $text = $self->new_text(-name => 'text', %opt);
-	$text->g_pack();
+	$text->g_pack(-fill => 'both', -expand => 1);
 
 	# Rename the widget to make it private. This enables us to stub the
 	# insert/delete methods and make it read-only. Calling _readonly() sets up
